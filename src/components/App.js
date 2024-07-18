@@ -2,6 +2,20 @@
 import React, { useState, useEffect } from "react";
 import './../styles/App.css';
 
+
+const CityList = ({ cities }) => {
+    return (
+        <div> 
+      <h2> Cities in India: </h2>
+        <ol>
+        { cities.map( (city) => ( 
+            <li key={city.key}>{city.name}</li>   
+            ))}
+        
+        </ol>
+    </div>
+ );  
+};
 const App = () => {
     const cityList = [{ name: 'Goa', country: 'India' },
     { name: 'Amsterdam', country: 'Netherlands' },
@@ -32,12 +46,24 @@ const App = () => {
     { name: 'Mount Abu', country: 'India' },
     { name: 'Tirupati', country: 'India' },
     ]
+
+
+    const filteredCity = cityList.filter( (city) => city.country === 'India');
+
+    const filteredCityWithKey = filteredCity.map( (city, index) => ({
+        ...city, 
+        key: `location${ index + 1}`
+    }));
+                                                
+                                                );
     
   return (
     <div id="main">
-               {/* Do not remove the main div */}
+               {/*SGN, Do not remove the main div */}
+        <CityList cities={filteredCityWithKey} />
+
     </div>
-  )
-}
+  );
+};
 
 export default App
